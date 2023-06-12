@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebApi.Data;
 using WebApi.Models;
 
@@ -22,11 +19,11 @@ public class UsersController : ControllerBase
   [HttpGet]
   public async Task<ActionResult<IEnumerable<User>>> GetUsers()
   {
-      return await _context.Users.ToListAsync();
+      return await _context.Users.OrderBy(u => u.Id).ToListAsync();
   }
 
   [HttpGet("{id}")]
-  public async Task<ActionResult<User >> GetUser(string id)
+  public async Task<ActionResult<User >> GetUser(int id)
   {
 
       var user = await _context.Users.FindAsync(id);
@@ -46,13 +43,13 @@ public class UsersController : ControllerBase
       _context.Users.Add(user);
       await _context.SaveChangesAsync();
 
-      return CreatedAtAction(nameof(GetUser), new { id = user.userid }, user);
+      return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
   }
 
   [HttpPut("{id}")]
   public async Task<IActionResult> UpdateUser(int id, User user)
   {
-      if (id != user.userid)
+      if (id != user.Id)
       {
           return BadRequest();
       }
@@ -78,8 +75,24 @@ public class UsersController : ControllerBase
       return NoContent();
   }
 
-  private bool UserExists(int id)
-  {
-      return _context.Users.Any(e => e.userid == id);
-  }
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(int id)
+    {
+    var user = await _context.Users.FindAsync(id);
+
+    if (user == null)
+    {
+        return NotFound(); // Return 404 Not Found if the user with the specified id does not exist
+    }
+
+    _context.Users.Remove(user);
+    await _context.SaveChangesAsync();
+
+    return NoContent(); // Return 204 No Content to indicate successful deletion
+}
+
+    private bool UserExists(int id)
+    {
+        return _context.Users.Any(e => e.Id == id);
+    }
 }

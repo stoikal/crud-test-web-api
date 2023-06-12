@@ -11,7 +11,7 @@ using WebApi.Data;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230612170731_InitialCreate")]
+    [Migration("20230612185825_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -26,28 +26,28 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("WebApi.Models.User", b =>
                 {
-                    b.Property<int>("userid")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("userid"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("namalengkap")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("password")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<char>("status")
+                    b.Property<char>("Status")
                         .HasColumnType("character(1)");
 
-                    b.Property<string>("username")
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("userid");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });

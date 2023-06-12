@@ -2,14 +2,14 @@ namespace WebApi.Models
 {
   public class User
   {
-    public int userid { get; set; }
+    public int Id { get; set; }
 
-    public string namalengkap { get; set; }
+    public string Name { get; set; }
 
-    public string username { get; set; }
+    public string Username { get; set; }
 
-    public string password { get; set; }
+    public string Password { get; set; }
 
-    public char status { get; set; }
+    public char Status { get; set; }
   }
 }

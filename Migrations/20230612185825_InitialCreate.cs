@@ -15,16 +15,16 @@ namespace WebApi.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    userid = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    namalengkap = table.Column<string>(type: "text", nullable: false),
-                    username = table.Column<string>(type: "text", nullable: false),
-                    password = table.Column<string>(type: "text", nullable: false),
-                    status = table.Column<char>(type: "character(1)", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Username = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<char>(type: "character(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.userid);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
         }
 
